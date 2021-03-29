@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import app from './modules/app';
 import user from './modules/user'
-import permission from './modules/permission'
+// import permission from './modules/permission'
 import settings from './modules/settings'
 import getters from '@/store/getters'
 
@@ -12,7 +12,7 @@ const store = new Vuex.Store({
     modules: {
         app,
         user,
-        permission,
+        // permission,
         settings,
     },
     getters

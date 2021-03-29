@@ -9,7 +9,7 @@ service.interceptors.request.use(
     config => {
         const authorization = localStorage.getItem('authorization')
         if (authorization) {
-            config.headers.authorization = authorization
+            config.headers['token'] = authorization;
         }
         return config
     },

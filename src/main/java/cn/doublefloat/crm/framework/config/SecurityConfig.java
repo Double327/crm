@@ -63,7 +63,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * */
     @Bean
     LoginFilter loginFilter() throws Exception {
-        System.out.println("loginFiler");
         LoginFilter loginFilter = new LoginFilter();
         loginFilter.setAuthenticationSuccessHandler(new AuthenticationSuccessHandler() {
             @Override

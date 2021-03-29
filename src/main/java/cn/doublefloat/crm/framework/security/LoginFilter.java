@@ -36,16 +36,17 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         }
 //        获取验证码图片中的信息
         String verify_code = (String) request.getSession().getAttribute("verify_code");
-        if (request.getContentType().equals(MediaType.APPLICATION_JSON_VALUE) || request.getContentType().equals(MediaType.APPLICATION_JSON_UTF8_VALUE)) {
+        System.out.println(request.getSession());
+        System.out.println(verify_code);
+//        if (request.getContentType().equals(MediaType.APPLICATION_JSON_VALUE) || request.getContentType().equals(MediaType.APPLICATION_JSON_UTF8_VALUE)) {
             Map<String, String> loginData = new HashMap<>();
             try {
                 loginData = new ObjectMapper().readValue(request.getInputStream(), Map.class);
+
             } catch (IOException e) {
             }finally {
-                System.out.println("hello world");
+
                 String code = loginData.get("verifyCode");
-                System.out.println("code"+code);
-                System.out.println("verifyCode"+verify_code);
                 checkCode(response, code, verify_code);
             }
             String username = loginData.get(getUsernameParameter());
@@ -61,10 +62,10 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
                     username, password);
             setDetails(request, authRequest);
             return this.getAuthenticationManager().authenticate(authRequest);
-        } else {
-            checkCode(response, request.getParameter("code"), verify_code);
-            return super.attemptAuthentication(request, response);
-        }
+//        } else {
+//            checkCode(response, request.getParameter("code"), verify_code);
+//            return super.attemptAuthentication(request, response);
+//        }
     }
 
     public void checkCode(HttpServletResponse resp, String code, String verify_code) {

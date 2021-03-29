@@ -24,7 +24,7 @@
           </el-form-item>
           <el-form-item prop="verifyCode" class="form-item">
             <li class="login-item verify">
-              <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;验证码：&nbsp;&nbsp;</span>
+              <span>&nbsp;&nbsp;&nbsp;&nbsp;验证码：&nbsp;&nbsp;</span>
               <el-input type="text" name="verifyCode" id="verifyCod e" class="login_input verify_input"
                      v-model="formInline.verifyCode">
               </el-input>
@@ -79,8 +79,8 @@ export default {
             console.log(res);
             if (res.code === 200) {
               localStorage.setItem('user', JSON.stringify(res.data))
-              localStorage.setItem('authorization', res.headers.authorization)
-              this.$router.push('/DoubleView')
+              localStorage.setItem('authorization', res.data)
+              this.$router.push('/')
             } else {
               this.vcUrl = process.env.VUE_APP_BASE_API + '/verifyCode?time=' + new Date();
             }
