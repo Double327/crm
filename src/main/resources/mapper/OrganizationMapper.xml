@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.doublefloat.crm.project.system.mapper.OrganizationMapper">
+    <select id="findAll" resultType="cn.doublefloat.crm.project.system.domain.Organization">
+        SELECT *
+        FROM organization
+    </select>
+    <select id="findById" resultType="cn.doublefloat.crm.project.system.domain.Organization">
+        SELECT *
+        from organization
+        where id = #{organizationId}
+    </select>
+    <insert id="save" parameterType="cn.doublefloat.crm.project.system.domain.Organization">
+        INSERT INTO organization (name, address, code, icon, parent_id, sort, create_time)
+        VALUES (#{name}, #{address}, #{code}, #{icon}, #{parentId}, #{sort}, sysdate())
+    </insert>
+    <update id="update" parameterType="cn.doublefloat.crm.project.system.domain.Organization">
+        UPDATE organization SET
+        <if test="name != '' and name != null">
+            name=#{name},
+        </if>
+        <if test="address != '' and address != null">
+            address=#{address},
+        </if>
+        <if test="code != '' and code != null">
+            code=#{code},
+        </if>
+        <if test="icon != '' and icon != null">
+            icon=#{icon},
+        </if>
+        <if test="parentId != '' and parentId != null">
+            parent_id=#{parentId},
+        </if>
+        <if test="sort != '' and sort != null">
+            sort=#{sort},
+        </if>
+        WHERE id = #{id}
+    </update>
+    <delete id="delete" parameterType="string">
+        DELETE
+        FROM organization
+        WHERE id = #{id}
+    </delete>
+</mapper>

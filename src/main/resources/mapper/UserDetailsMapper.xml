@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.doublefloat.crm.project.system.mapper.UserDetailsMapper">
+    <select id="selectUserByName" resultType="cn.doublefloat.crm.project.system.domain.vo.UserDetail">
+        select * from user where loginName = #{loginName}
+    </select>
+    <select id="queryRolesByUid" resultType="cn.doublefloat.crm.project.system.domain.Role">
+        select * from role r,user_role ur where r.id = ur.roleId and ur.userId =#{id}
+    </select>
+</mapper>

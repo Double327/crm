@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.doublefloat.crm.project.system.mapper.ResourceMapper">
+    <insert id="saveResource">
+        INSERT into resource (name, url, open_mode, description, icon, parent_id, sort, status, opened, resource_type,
+                              create_time)
+        VALUES (#{name},
+                #{url},
+                #{openMode},
+                #{description},
+                #{icon},
+                #{parentId},
+                #{sort},
+                #{status},
+                #{opened},
+                #{resourceType},
+                sysdate())
+    </insert>
+    <update id="editResource">
+        update resource
+        set name=#{name},
+            url=#{url},
+            open_mode=#{openMode},
+            icon=#{icon},
+            parent_id=#{parentId},
+            sort=#{sort},
+            status=#{status},
+            opened=#{opened},
+            resource_type=#{resourceType},
+            create_time=#{createTime}
+        where id = #{id}
+    </update>
+    <select id="findResourceById" resultType="cn.doublefloat.crm.project.system.domain.Resource">
+        SELECT *
+        FROM resource
+        where id = #{id}
+    </select>
+
+    <select id="findChildrenResourceId" resultType="Long">
+        SELECT id
+        FROM resource
+        where parent_id = #{id}
+    </select>
+    <delete id="batchRemoveResource" parameterType="java.util.List">
+        DELETE
+        from resource
+                where id IN
+        <foreach item="id" collection="list" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="findResourceIds" resultType="Long">
+        SELECT resource_id
+        from role_resource
+        where role_id = #{id}
+    </select>
+    <select id="batchFindParentByResourceId" resultType="cn.doublefloat.crm.project.system.domain.Resource">
+        SELECT *
+        from resource
+                where id in(
+                SELECT DISTINCT parent_id
+                from resource
+                where id in
+        <foreach item="id" collection="list" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+        )
+    </select>
+    <select id="findResource" resultType="cn.doublefloat.crm.project.system.domain.Resource">
+        SELECT *
+        FROM resource
+        <where>
+            <if test="type != null">
+                resource_type = #{type}
+            </if>
+        </where>
+    </select>
+</mapper>

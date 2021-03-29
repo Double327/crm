@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    druid:
+      url: jdbc:mysql://cdb-2tt4kxl0.bj.tencentcdb.com:10151/crm
+      username: root
+      password: 0327LGSsr
+      driver-class-name: com.mysql.cj.jdbc.Driver

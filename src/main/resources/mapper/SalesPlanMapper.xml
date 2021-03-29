@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.doublefloat.crm.project.customer.mapper.SalesPlanMapper">
+    <!--执行开发-->
+    <update id="startPlan" parameterType="cn.doublefloat.crm.project.customer.domain.SalesPlan">
+        update sales_plan
+        set date=#{date},
+            plan_content=#{plan_content},
+            status=#{status}
+        where id = #{id}
+    </update>
+    <!--开发状态-->
+    <update id="changeStatus" parameterType="cn.doublefloat.crm.project.customer.domain.SalesPlan">
+        update sales_plan
+        set status=#{status}
+        where id = #{id}
+    </update>
+</mapper>

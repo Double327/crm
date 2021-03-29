@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.doublefloat.crm.project.customer.mapper.DrainsMapper">
+    <!--查询-->
+    <select id="selectCustomer" resultType="cn.doublefloat.crm.project.customer.domain.Drains">
+        select *
+        from customer_drains
+    </select>
+    <!--修改状态-->
+    <update id="updateCustomer">
+        update customer_drains
+        set status=#{status},
+            drain_date=#{drainDate},
+            last_order_date=#{lastOrderDate}
+        WHERE id = #{id}
+    </update>
+    <!--插入-->
+    <insert id="insertCustomer">
+        insert into customer_drains
+        values (#{id}, #{customerId}, #{status}, #{delay}, #{reason}, #{drainDate}, #{lastOrderDate})
+    </insert>
+    <!--按照id查询-->
+    <select id="selectCustomerbyId" resultType="cn.doublefloat.crm.project.customer.domain.Drains">
+        select *
+        from customer_drains
+        where id = #{id}
+    </select>
+</mapper>

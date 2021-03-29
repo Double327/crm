@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.doublefloat.crm.project.system.mapper.RoleResourceMapper">
+    <delete id="delete">
+        DELETE
+        from role_resource
+        where role_id = #{roleId}
+    </delete>
+    <insert id="add">
+        INSERT INTO role_resource (role_id, resource_id)
+        VALUES (#{roleId}, #{resourceId})
+    </insert>
+
+    <select id="batchFindResourceId" parameterType="java.util.List" resultType="Long">
+        SELECT DISTINCT resource_id
+        from role_resource
+                where role_id IN
+        <foreach item="roleId" collection="list" open="(" close=")" separator=",">
+            #{roleId}
+        </foreach>
+    </select>
+</mapper>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.doublefloat.crm.project.system.mapper.UserMapper">
+    <select id="findUser" resultType="cn.doublefloat.crm.project.system.domain.User">
+        SELECT *
+        FROM user
+        WHERE login_name = #{loginName}
+        AND password = #{password}
+    </select>
+    <select id="findAll" resultType="cn.doublefloat.crm.project.system.domain.User">
+        SELECT *
+        FROM user
+        WHERE 1 = 1
+        <if test="id != '' and id != null">
+            AND id = #{id}
+        </if>
+        <if test="loginName != '' and loginName != null">
+            AND login_name = #{loginName}
+        </if>
+        <if test="realName != '' and realName != null">
+            AND real_name = #{realName}
+        </if>
+        <if test="userType != '' and userType != null">
+            AND user_type = #{userType}
+        </if>
+        <if test="organizationId != '' and organizationId != null">
+            AND organization_id = #{organizationId}
+        </if>
+    </select>
+    <select id="countAll" parameterType="cn.doublefloat.crm.project.system.domain.User" resultType="int">
+        SELECT COUNT(*)
+        FROM user
+        WHERE 1 = 1
+        <if test="id != '' and id != null">
+            AND id = #{id}
+        </if>
+        <if test="loginName != '' and loginName != null">
+            AND login_name = #{loginName}
+        </if>
+        <if test="realName != '' and realName != null">
+            AND real_name = #{realName}
+        </if>
+        <if test="userType != '' and userType != null">
+            AND user_type = #{userType}
+        </if>
+        <if test="organizationId != '' and organizationId != null">
+            AND organization_id = #{organizationId}
+        </if>
+    </select>
+
+    <insert id="saveUser" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO user (login_name, real_name, password, sex, birth, phone, user_type, organization_id,
+        create_time)
+        VALUES (#{loginName}, #{realName}, #{password}, #{sex}, #{birth}, #{phone},
+        #{userType}, #{organizationId}, sysdate())
+    </insert>
+    <delete id="remove" parameterType="Long">
+        DELETE
+        FROM user
+        WHERE id = #{id}
+    </delete>
+    <select id="findById" resultType="cn.doublefloat.crm.project.system.domain.User">
+        SELECT *
+        FROM user
+        WHERE id = #{id}
+    </select>
+    <update id="editUser" parameterType="cn.doublefloat.crm.project.system.domain.User">
+        UPDATE user
+        SET
+        <if test="loginName != '' and loginName != null">
+            login_name = #{loginName},
+        </if>
+        <if test="realName != '' and realName != null">
+            real_name = #{realName},
+        </if>
+        <if test="password != '' and password != null">
+            password = #{password},
+        </if>
+        <if test="sex != '' and sex != null">
+            sex=#{sex},
+        </if>
+        <if test="birth != '' and birth != null">
+            birth = #{birth},
+        </if>
+        <if test="phone != '' and phone != null">
+            phone = #{phone},
+        </if>
+        <if test="userType != '' and userType != null">
+            user_type = #{userType},
+        </if>
+        <if test="status != '' and status != null">
+            status = #{status},
+        </if>
+        <if test="organizationId != '' and organizationId != null">
+            organization_id = #{organizationId},
+        </if>
+        where id = #{id}
+    </update>
+
+    <select id="findSalesAll" resultType="map">
+        SELECT u.id, u.real_name AS text
+        FROM user u
+                     JOIN organization o
+                ON u.organization_id = u.organization_id
+        WHERE o.`name` = '销售部'
+    </select>
+
+
+    <select id="findAllManager" resultType="map">
+        SELECT u.id, u.real_name AS text
+        FROM `user` u
+                     JOIN user_role ur
+                ON u.id = ur.user_id
+                     JOIN role r
+                ON r.id = ur.role_id
+        WHERE r.`name` = 'CustomerManager'
+    </select>
+
+    <select id="findByLoginName" resultType="cn.doublefloat.crm.project.system.domain.User">
+        SELECT *
+        FROM user
+        WHERE login_name = #{loginName}
+    </select>
+</mapper>

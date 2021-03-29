@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.doublefloat.crm.project.customer.mapper.SalesChanceMapper">
+    <!--编辑营销机会-->
+    <update id="editChance" parameterType="cn.doublefloat.crm.project.customer.domain.SalesChance">
+        update sales_chance
+        set customer_name=#{customer_name},
+            title=#{title},
+            contact=#{contact},
+            contact_tel=#{contact_tel},
+            create_by=#{create_by},
+            create_date=#{create_date}
+        where id = #{id}
+    </update>
+    <!--得到初始数据-->
+    <select id="getBeginData" parameterType="java.lang.Integer"
+            resultType="cn.doublefloat.crm.project.customer.domain.SalesChance">
+        select customer_name = #{customer_name},
+               title = #{title},
+               contact = #{contact},
+               contact_tel = #{contact_tel},
+               create_by = #{create_by},
+               create_date = #{create_date}
+        from sales_chance
+        where id = #{id}
+    </select>
+    <!--指派工作人员-->
+    <update id="assign" parameterType="cn.doublefloat.crm.project.customer.domain.SalesChance">
+        update sales_chance
+        set designee=#{designee},
+            description=#{description},
+            status=#{status},
+            designee=#{designee}
+        where id = #{id}
+    </update>
+
+    <!--删除营销机会-->
+    <delete id="deleteChance">
+        delete
+        from sales_chance
+        where id = #{id}
+    </delete>
+
+    <!--增加营销机会-->
+    <insert id="insertChance" parameterType="cn.doublefloat.crm.project.customer.domain.SalesChance">
+        INSERT INTO sales_chance (customer_name, title, contact, contact_tel, create_by, create_date)
+        values (#{customer_name}, #{title}, #{contact},
+                #{contact_tel}, #{create_by}, #{create_date})
+    </insert>
+    <!--    <insert id="insertChance" parameterType="cn.doublefloat.crm.project.customer.domain.SalesChance">-->
+    <!--        insert into sales_chance-->
+    <!--        values (customer_name = #{customer_name}, title = #{title}, contact = #{contact},-->
+    <!--                contact_tel = #{contact_tel}, create_by = #{create_by}, create_date = #{create_date})-->
+    <!--    </insert>-->
+</mapper>

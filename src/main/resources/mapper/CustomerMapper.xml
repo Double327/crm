@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.doublefloat.crm.project.customer.mapper.CustomerMapper">
+    <!--1.查询（显示）客户-->
+    <select id="findCustomer" resultType="cn.doublefloat.crm.project.customer.domain.Customer">
+        select *
+        from customer
+        where `state` != 1
+    </select>
+
+    <!--2.添加客户-->
+    <insert id="addCustomer">
+        insert into customer (name, region, manager_id, telephone, fax, level, satify, credit, state)
+        values (#{name}, #{region}, #{managerId}, #{telephone},
+                #{fax}, #{level}, #{satify}, #{credit}, #{state})
+    </insert>
+
+    <!--3.修改客户-->
+    <update id="updateCustomer">
+        update customer
+        set name       = #{name},
+            region     = #{region},
+            manager_id = #{managerId},
+            telephone  = #{telephone},
+            fax        = #{fax},
+            level      = #{level},
+            satify     = #{satify},
+            credit     = #{credit},
+            state      = #{state}
+        where id = #{id}
+    </update>
+
+    <!--4.删除客户-->
+    <delete id="deleteCustomer">
+        delete
+        from customer
+        where id = #{id}
+    </delete>
+
+    <!--5.设置状态-->
+    <update id="setCusState">
+        update customer
+        set state = #{state}
+        where id = #{id}
+    </update>
+</mapper>
