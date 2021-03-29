@@ -49,10 +49,10 @@
     </select>
 
     <insert id="saveUser" keyProperty="id" useGeneratedKeys="true">
-        INSERT INTO user (login_name, real_name, password, sex, birth, phone, user_type, organization_id,
+        INSERT INTO user (login_name, real_name, password, sex, birth, phone, organization_id,
         create_time)
         VALUES (#{loginName}, #{realName}, #{password}, #{sex}, #{birth}, #{phone},
-        #{userType}, #{organizationId}, sysdate())
+         #{organizationId}, sysdate())
     </insert>
     <delete id="remove" parameterType="Long">
         DELETE
@@ -94,6 +94,7 @@
         <if test="organizationId != '' and organizationId != null">
             organization_id = #{organizationId},
         </if>
+        id = #{id}
         where id = #{id}
     </update>
 
@@ -121,4 +122,10 @@
         FROM user
         WHERE login_name = #{loginName}
     </select>
+
+    <update id="changeStatus">
+        UPDATE user
+        SET status = #{status}
+        WHERE id = #{id};
+    </update>
 </mapper>

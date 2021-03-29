@@ -61,7 +61,6 @@ public class UserServiceImpl implements UserService {
         } else {
             User u = new User(user);
             int editRes = userMapper.editUser(u);
-
             userRoleMapper.deleteByUserId(u.getId());
             saveUserRole(user);
             return editRes;
@@ -108,6 +107,11 @@ public class UserServiceImpl implements UserService {
     public int setPassword(Password pwd) {
         User user = userMapper.findById(pwd.getId());
         return 0;
+    }
+
+    @Override
+    public int changeStatus(User user) {
+        return userMapper.changeStatus(user);
     }
 
     private UserVo getUserVo(User user) {

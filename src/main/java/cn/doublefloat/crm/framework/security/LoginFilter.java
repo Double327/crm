@@ -42,7 +42,10 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
                 loginData = new ObjectMapper().readValue(request.getInputStream(), Map.class);
             } catch (IOException e) {
             }finally {
+                System.out.println("hello world");
                 String code = loginData.get("verifyCode");
+                System.out.println("code"+code);
+                System.out.println("verifyCode"+verify_code);
                 checkCode(response, code, verify_code);
             }
             String username = loginData.get(getUsernameParameter());

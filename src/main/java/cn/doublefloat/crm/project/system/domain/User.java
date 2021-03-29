@@ -87,6 +87,7 @@ public class User {
     }
 
     public User(UserVo user) {
+        this.id = user.getId();
         this.loginName = user.getLoginName();
         this.realName = user.getRealName();
         this.password = user.getPassword();

@@ -86,4 +86,12 @@ public interface UserService {
      * @return 结果
      */
     int setPassword(Password pwd);
+
+    /**
+     * 修改用户状态
+     *
+     * @param user 用户信息
+     * @return 结果
+     */
+    int changeStatus(User user);
 }

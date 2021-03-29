@@ -34,7 +34,6 @@ export default {
   mounted() {
     getResource().then(res => {
       this.menuList = res.data;
-      console.log(res);
     })
   },
   data() {

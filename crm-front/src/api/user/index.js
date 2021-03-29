@@ -28,3 +28,19 @@ export function findAllSales() {
         method: 'get'
     })
 }
+
+
+export function changeStatus(user) {
+    return request({
+        url: '/user/changeStatus',
+        method: 'put',
+        params: user
+    })
+}
+
+export function deleteUser(id) {
+    return request({
+        url: '/user/' + id,
+        method: 'delete'
+    })
+}

@@ -63,6 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * */
     @Bean
     LoginFilter loginFilter() throws Exception {
+        System.out.println("loginFiler");
         LoginFilter loginFilter = new LoginFilter();
         loginFilter.setAuthenticationSuccessHandler(new AuthenticationSuccessHandler() {
             @Override
@@ -123,29 +124,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests().anyRequest().anonymous().and()
-//                .authorizeRequests()
-////                验证码
-//                .antMatchers("/verifyCode").permitAll()
-////                注册
-//                .antMatchers("/doRegister").permitAll()
-////                注销
-//                .antMatchers("/loginOut").permitAll()
-////                登录
-//                .antMatchers(HttpMethod.POST, "/doLogin").permitAll()
-//                //设置访问已经上传的文件访问允许匿名
-//                .antMatchers("/file/**").anonymous()
-//                .antMatchers("/swagger-ui.html").anonymous()
-//                .antMatchers("/swagger-resources/**").anonymous()
-//                .antMatchers("/webjars/**").anonymous()
-//                .antMatchers("/*/api-docs").anonymous()
-//                .antMatchers("/druid/**").anonymous()
-//                .anyRequest()
-//                .authenticated()
-//                .and()
-//                /* 在接受到请求之后 触发security之前 先进行jwt验证 如果请求头中由header值 那么放行拦截*/
-//                .addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class)
-//                .addFilterAt(loginFilter(), UsernamePasswordAuthenticationFilter.class)
+                .authorizeRequests()/*.anyRequest().anonymous().and()*/
+             //   .authorizeRequests()
+//                验证码
+                .antMatchers("/verifyCode").permitAll()
+//                注册
+                .antMatchers("/doRegister").permitAll()
+//                注销
+                .antMatchers("/loginOut").permitAll()
+//                登录
+                .antMatchers(HttpMethod.POST, "/doLogin").permitAll()
+                //设置访问已经上传的文件访问允许匿名
+                .antMatchers("/file/**").anonymous()
+                .antMatchers("/swagger-ui.html").anonymous()
+                .antMatchers("/swagger-resources/**").anonymous()
+                .antMatchers("/webjars/**").anonymous()
+                .antMatchers("/*/api-docs").anonymous()
+                .antMatchers("/druid/**").anonymous()
+                .anyRequest()
+                .authenticated()
+                .and()
+                /* 在接受到请求之后 触发security之前 先进行jwt验证 如果请求头中由header值 那么放行拦截*/
+                .addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterAt(loginFilter(), UsernamePasswordAuthenticationFilter.class)
                 .csrf()
                 .disable();
     }

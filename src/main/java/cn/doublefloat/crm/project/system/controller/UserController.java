@@ -47,7 +47,8 @@ public class UserController extends BaseController {
     }
 
     @PostMapping("/")
-    public JsonResult saveUser(UserVo user) {
+    public JsonResult saveUser(@RequestBody UserVo user) {
+        System.out.println(user);
         int i = userService.saveUser(user);
         return toJson(i);
     }
@@ -68,5 +69,11 @@ public class UserController extends BaseController {
     @PutMapping("/resetPwd")
     public JsonResult setPwd(Password pwd) {
         return toJson(userService.setPassword(pwd));
+    }
+
+    @PutMapping("/changeStatus")
+    public JsonResult changeStatus(User user) {
+        int res = userService.changeStatus(user);
+        return toJson(res);
     }
 }

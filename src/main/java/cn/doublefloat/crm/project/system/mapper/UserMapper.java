@@ -35,4 +35,6 @@ public interface UserMapper {
     List<Map<Long, Object>> findSalesAll();
 
     List<Map<Long, Object>> findAllManager();
+
+    int changeStatus(User user);
 }
