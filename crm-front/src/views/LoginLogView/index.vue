@@ -2,11 +2,12 @@
   <div>
     <template>
       <el-main>
-        <el-button @click="dowloadData" icon="el-icon-delete" type="primary">清除过滤</el-button>
+        <el-button  icon="el-icon-delete" type="primary">登录日志管理</el-button>
       </el-main>
       <el-table
           ref="singleTable"
           :data="tableData"
+          v-loading="loading"
           highlight-current-row
           @current-change="handleCurrentChange"
           style="width: 100%"
@@ -14,31 +15,27 @@
         <el-table-column
             type="index"
             label="编号"
+            property="id"
             align="center"
             width="120">
         </el-table-column>
         <el-table-column
             type="selector"
-            label="方法名"
+            label="姓名"
+            property="username"
             align="center"
             width="180">
         </el-table-column>
         <el-table-column
-            property="lineandclass"
-            label="行+类名"
+            property="loginip"
+            label="ip地址"
             align="center"
             width="360">
         </el-table-column>
         <el-table-column
-            property="log"
-            label="日志信息（登录名+【角色或密码】+状态）"
+            property="logindate"
+            label="登录日期"
             align="center">
-        </el-table-column>
-        <el-table-column
-            property="time"
-            label="时间"
-            align="center"
-            width="360">
         </el-table-column>
 
       </el-table>
@@ -59,34 +56,30 @@
 </template>
 
 <script>
+import {getLog} from "@/api/log";
+
 export default {
   name: "LoginLogView",
   data() {
     return {
-      tableData: [{
-        index:'1',
-        selector:'login',
-        lineandclass:'28,com.maizhe.controller.LoginController',
-        log:'admin【admin,TD manager,product,test】登陆成功',
-        time:'2018-03-05 11:54:14',
-      }, {
-        index:'2',
-        selector:'login',
-        lineandclass:'3.39kb',
-        log:'admin',
-        time:'2018-03-05 11:54:14',
-      }, {
-        index:'3',
-        selector:'login',
-        lineandclass:'3.39kb',
-        log:'admin',
-        time:'2018-03-05 11:54:14',
-      }],
+      tableData: [],
       currentRow: null
     }
   },
-
+  mounted() {
+    this.loading=true
+    this.initTable()
+  },
   methods: {
+    initTable(){
+      getLog().then(res => {
+        console.log(res)
+        if(res){
+          this.loading=false
+          this.tableData = res.data
+        }
+      })
+    },
     setCurrent(row) {
       this.$refs.singleTable.setCurrentRow(row);
     },

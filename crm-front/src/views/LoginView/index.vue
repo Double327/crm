@@ -1,14 +1,20 @@
 <template>
   <div class="page">
     <img id="img" src="@/assets/mountain.jpg"/>
-    <div class="loginwarrp">
+    <div class="loginwarrp" >
       <div class="logo">Login</div>
       <div class="login_form">
-        <el-form id="Login" ref="formInline" name="Login" method="post" onsubmit="" action="" :model="formInline"
+        <el-form id="Login"
+                 ref="formInline"
+                 v-loading="loadingTable"
+                 element-loading-text="正在登录中"
+                 element-loading-spinner="el-icon-loading"
+                 element-loading-background="rgba(0, 0, 0, 0.8)"
+                 :model="formInline"
               :rules="ruleInline">
           <el-form-item prop="username" class="form-item">
             <li class="login-item">
-              <span>&nbsp;&nbsp;&nbsp;用户名：&nbsp;&nbsp;</span>
+              <span>用户名：</span>
               <el-input type="text" id="username" name="username" class="login_input" v-model="formInline.username">
               </el-input>
               <span id="count-msg" class="error"></span>
@@ -16,15 +22,15 @@
           </el-form-item>
           <el-form-item prop="password" class="form-item">
             <li class="login-item">
-              <span>&nbsp;&nbsp;&nbsp;&nbsp;密　码：&nbsp;&nbsp;</span>
-              <el-input type="password" id="password" name="password" class="login_input" v-model="formInline.password">
+              <span>密码：</span>
+              <el-input type="password" id="password" name="password" class="login_input pwd_input" v-model="formInline.password">
               </el-input>
               <span id="password-msg" class="error"></span>
             </li>
           </el-form-item>
           <el-form-item prop="verifyCode" class="form-item">
             <li class="login-item verify">
-              <span>&nbsp;&nbsp;&nbsp;&nbsp;验证码：&nbsp;&nbsp;</span>
+              <span>验证码：</span>
               <el-input type="text" name="verifyCode" id="verifyCod e" class="login_input verify_input"
                      v-model="formInline.verifyCode">
               </el-input>
@@ -52,8 +58,8 @@ export default {
   data() {
     return {
       formInline: {
-        username: 'admin',
-        password: '123456',
+        username: '',
+        password: '',
         verifyCode: ''
       },
       ruleInline: {
@@ -68,20 +74,23 @@ export default {
           {required: true, message: '请输入验证码', trigger: 'blur'}
         ]
       },
-      vcUrl: process.env.VUE_APP_BASE_API + '/verifyCode?time' + new Date()
+      vcUrl: process.env.VUE_APP_BASE_API + '/verifyCode?time' + new Date(),
+      loadingTable: false
     }
   },
   methods: {
     handleSubmit(name) {
       this.$refs[name].validate((valid) => {
         if (valid) {
+          this.loadingTable = true
           getLogin('/doLogin', this.formInline).then(res => {
-            console.log(res);
             if (res.code === 200) {
               localStorage.setItem('user', JSON.stringify(res.data))
               localStorage.setItem('authorization', res.data)
+              this.loadingTable = false
               this.$router.push('/')
             } else {
+              this.loadingTable = false
               this.vcUrl = process.env.VUE_APP_BASE_API + '/verifyCode?time=' + new Date();
             }
           })
@@ -101,7 +110,9 @@ export default {
 .page {
   margin: -150px auto;
 }
-
+.pwd_input{
+ margin-left: 10px;
+}
 body {
   text-align: center;
   margin: 0;
@@ -120,7 +131,7 @@ body {
 
 .loginwarrp {
   margin: 250px auto;
-  width: 400px;
+  width: 280px;
   padding: 30px 50px;
   background: #888d97;
   border: 0px;
@@ -149,6 +160,7 @@ body {
   border: 1px solid #dedede;
   border-radius: 8px;
   margin-top: 10px;
+  text-align: center;
 }
 
 .loginwarrp .login_form .login_input {
