@@ -2,6 +2,7 @@
   <div>
     <template>
       <el-main>
+
       </el-main>
       <el-table
           ref="singleTable"
@@ -47,18 +48,18 @@
             align="center"
             width="360">
           <template slot-scope="scope">
-            <el-button
-                size="mini"
-                type="primary" @click="start(scope.row)" plain>执行开发
-            </el-button>
-            <el-button
-                size="mini"
-                type="success" @click="success(scope.row)" plain>开发成功
-            </el-button>
-            <el-button
-                size="mini"
-                type="danger" @click="lose(scope.row)" plain>开发失败
-            </el-button>
+            <el-button type="primary"
+                class="font-awesome"
+                @click="start(scope.row)" circle
+            >&#xf04b;</el-button>执行开发
+            <el-button type="success"
+                icon="el-icon-check"
+                @click="success(scope.row)"
+                 circle></el-button>开发成功
+            <el-button type="danger"
+                 icon="el-icon-close"
+                 @click="lose(scope.row)"
+                 circle></el-button>开发失败
           </template>
         </el-table-column>
       </el-table>
@@ -89,17 +90,15 @@ export default {
   mounted: function() {
     this.tableLoading = true
     this.loadUserList()
-
   },
   methods: {
     loadUserList() {
       findAllUser().then(res => {
         this.tableLoading = false
-        console.log("res的值为:"+res)
         if(res) {
           this.tableData = res.data
+          console.log("status"+this.data)
         }
-
       })
     },
     setCurrent(row) {
@@ -148,7 +147,20 @@ export default {
 
 
 <style scoped>
-
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('../../assets/style/font-awesome-4.7.0/fonts/fontawesome-webfont.eot?v=4.7.0');
+  src: url('../../assets/style/font-awesome-4.7.0/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0') format('embedded-opentype'), url('../../assets/style/font-awesome-4.7.0/fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'), url('../../assets/style/font-awesome-4.7.0/fonts/fontawesome-webfont.woff?v=4.7.0') format('woff'), url('../../assets/style/font-awesome-4.7.0/fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype'), url('../../assets/style/font-awesome-4.7.0/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.font-awesome{
+  width: 20px;
+  padding-bottom: 25px;
+  padding-right: 20px;
+  height: 20px;
+  font-family: FontAwesome;
+}
 .right-search{
   margin-left: 1360px;
 }
