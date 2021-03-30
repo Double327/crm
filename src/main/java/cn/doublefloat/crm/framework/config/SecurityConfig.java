@@ -68,7 +68,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             @Override
             public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
                 response.setContentType("application/json;charset=utf-8");
-                System.out.println(authentication.getPrincipal());
                 PrintWriter out = response.getWriter();
                 UserDetail userDetail = (UserDetail) authentication.getPrincipal();
                 String jwt = Jwts.builder()

@@ -1,6 +1,6 @@
 package cn.doublefloat.crm.project.customer.domain;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * 销售计划实体类
@@ -12,14 +12,41 @@ public class SalesPlan {
      * id
      */
     private Integer id;
+    /**
+     * 营销机会ID
+     */
+    private Integer salesChanceId;
+    /**
+     * 计划实施时间
+     */
+    private Date date;
+    /**
+     * 计划内容
+     */
+    private String planContent;
+    /**
+     * 计划执行结果(0.未执行1.执行中2.开发成功3.开发失败 )
+     */
+    private String status;
 
-    private Integer sales_chance_id; //营销机会ID
-    private Timestamp date; //计划实施时间
-    private String plan_content; //计划内容
-    private Character status;// 计划执行结果(0.未执行1.执行中2.开发成功3.开发失败 )
+    /**
+     * toString()方法
+     */
+    @Override
+    public String toString() {
+        return "SalesPlan{" +
+                "id=" + id +
+                ", salesChanceId=" + salesChanceId +
+                ", date=" + date +
+                ", planContent='" + planContent + '\'' +
+                ", status='" + status + '\'' +
+                '}';
+    }
 
-
-    /*get和set方法*/
+    /**
+     * get和set方法
+     *
+     */
 
     public Integer getId() {
         return id;
@@ -29,35 +56,35 @@ public class SalesPlan {
         this.id = id;
     }
 
-    public Integer getSales_chance_id() {
-        return sales_chance_id;
+    public Integer getSalesChanceId() {
+        return salesChanceId;
     }
 
-    public void setSales_chance_id(Integer sales_chance_id) {
-        this.sales_chance_id = sales_chance_id;
+    public void setSalesChanceId(Integer salesChanceId) {
+        this.salesChanceId = salesChanceId;
     }
 
-    public Timestamp getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(Timestamp date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
-    public String getPlan_content() {
-        return plan_content;
+    public String getPlanContent() {
+        return planContent;
     }
 
-    public void setPlan_content(String plan_content) {
-        this.plan_content = plan_content;
+    public void setPlanContent(String planContent) {
+        this.planContent = planContent;
     }
 
-    public Character getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Character status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 }

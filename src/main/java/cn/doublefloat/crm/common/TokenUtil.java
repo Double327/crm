@@ -1,14 +1,8 @@
 package cn.doublefloat.crm.common;
 
-import cn.doublefloat.crm.project.system.domain.vo.UserVo;
-import cn.doublefloat.crm.project.system.service.impl.UserDetailService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
-
 
 /**
  * @author RedReins

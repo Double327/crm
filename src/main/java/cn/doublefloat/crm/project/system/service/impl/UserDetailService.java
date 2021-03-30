@@ -2,7 +2,9 @@ package cn.doublefloat.crm.project.system.service.impl;
 
 import cn.doublefloat.crm.project.system.domain.Role;
 import cn.doublefloat.crm.project.system.domain.vo.UserDetail;
+import cn.doublefloat.crm.project.system.domain.vo.UserVo;
 import cn.doublefloat.crm.project.system.mapper.UserDetailsMapper;
+import cn.doublefloat.crm.project.system.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -22,6 +24,9 @@ public class UserDetailService implements UserDetailsService {
     @Autowired
     UserDetailsMapper userDetailsMapper;
 
+    @Autowired
+    private UserMapper userMapper;
+
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         UserDetail userDetails = userDetailsMapper.selectUserByName(s);
@@ -31,11 +36,8 @@ public class UserDetailService implements UserDetailsService {
         userDetails.setRoles(userDetailsMapper.queryRolesByUid(userDetails.getId()));
         return userDetails;
     }
-    public UserDetail selectUserByName(String loginName){
-        return userDetailsMapper.selectUserByName(loginName);
-    }
 
-    public List<Role> queryRolesByUid(Long id){
-        return userDetailsMapper.queryRolesByUid(id);
+    public UserVo findByLoginName(String loginName) {
+        return new UserVo(userMapper.findByLoginName(loginName));
     }
 }

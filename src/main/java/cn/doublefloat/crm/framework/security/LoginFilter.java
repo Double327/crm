@@ -36,8 +36,6 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         }
 //        获取验证码图片中的信息
         String verify_code = (String) request.getSession().getAttribute("verify_code");
-        System.out.println(request.getSession());
-        System.out.println(verify_code);
 //        if (request.getContentType().equals(MediaType.APPLICATION_JSON_VALUE) || request.getContentType().equals(MediaType.APPLICATION_JSON_UTF8_VALUE)) {
             Map<String, String> loginData = new HashMap<>();
             try {

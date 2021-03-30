@@ -4,18 +4,24 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cn.doublefloat.crm.project.customer.mapper.SalesPlanMapper">
-    <!--执行开发-->
-    <update id="startPlan" parameterType="cn.doublefloat.crm.project.customer.domain.SalesPlan">
+    <insert id="insertDate">
+        INSERT into sales_plan(sales_chance_id)
+        select id from sales_chance where `status`=1
+                                      and not EXISTS(select sales_chance_id from sales_plan where sales_chance.id=sales_plan.sales_chance_id)
+    </insert>
+    <update id="startPlan">
         update sales_plan
         set date=#{date},
-            plan_content=#{plan_content},
+            plan_content=#{planContent},
             status=#{status}
         where id = #{id}
     </update>
-    <!--开发状态-->
-    <update id="changeStatus" parameterType="cn.doublefloat.crm.project.customer.domain.SalesPlan">
+    <update id="changeStatus">
         update sales_plan
         set status=#{status}
         where id = #{id}
     </update>
+    <select id="findAll" resultType="cn.doublefloat.crm.project.customer.domain.SalesPlan">
+        select * from sales_plan
+    </select>
 </mapper>

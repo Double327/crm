@@ -40,7 +40,6 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         String authHeader = request.getHeader("token");//获取header中的验证信息
-        System.out.println("authHeader"+authHeader);
 
         if(authHeader!=null){
             Claims claims;
@@ -51,7 +50,6 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
                 claims = e.getClaims();
             }
         String username = claims.getSubject();//获取当前登录用户名
-        System.out.println("username"+username);
             LinkedHashMap authorities1 = (LinkedHashMap) claims.get("authorities");
             String json = new JSONObject().toJSONString(authorities1);
             List<GrantedAuthority> authorities = AuthorityUtils.commaSeparatedStringToAuthorityList(json);
