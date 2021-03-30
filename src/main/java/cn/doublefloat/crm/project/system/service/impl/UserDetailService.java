@@ -2,6 +2,7 @@ package cn.doublefloat.crm.project.system.service.impl;
 
 import cn.doublefloat.crm.project.system.domain.Role;
 import cn.doublefloat.crm.project.system.domain.vo.UserDetail;
+import cn.doublefloat.crm.project.system.domain.vo.UserLog;
 import cn.doublefloat.crm.project.system.domain.vo.UserVo;
 import cn.doublefloat.crm.project.system.mapper.UserDetailsMapper;
 import cn.doublefloat.crm.project.system.mapper.UserMapper;
@@ -35,6 +36,12 @@ public class UserDetailService implements UserDetailsService {
         }
         userDetails.setRoles(userDetailsMapper.queryRolesByUid(userDetails.getId()));
         return userDetails;
+    }
+    public int addUserLog(UserLog userLog){
+        return userDetailsMapper.addUserLog(userLog);
+    }
+    public List<UserLog> findAllLogs(){
+        return userDetailsMapper.findAllLogs();
     }
 
     public UserVo findByLoginName(String loginName) {

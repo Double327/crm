@@ -2,6 +2,7 @@ package cn.doublefloat.crm.project.system.mapper;
 
 import cn.doublefloat.crm.project.system.domain.Role;
 import cn.doublefloat.crm.project.system.domain.vo.UserDetail;
+import cn.doublefloat.crm.project.system.domain.vo.UserLog;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,5 +18,12 @@ public interface UserDetailsMapper {
     UserDetail selectUserByName(String loginName);
 
     List<Role> queryRolesByUid(Long id);
+
+    /*
+    * 添加用户日志
+    * */
+    int addUserLog(UserLog userLog);
+
+    List<UserLog> findAllLogs();
 
 }

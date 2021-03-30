@@ -122,8 +122,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests()/*.anyRequest().anonymous().and()*/
-             //   .authorizeRequests()
+                .authorizeRequests()
 //                验证码
                 .antMatchers("/verifyCode").permitAll()
 //                注册

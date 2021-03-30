@@ -1,5 +1,9 @@
 package cn.doublefloat.crm.project.customer.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Date;
 
 /**
@@ -7,10 +11,13 @@ import java.util.Date;
  *
  * @author 仇武元
  */
+@Entity
 public class SalesPlan {
     /**
      * id
      */
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    @Id
     private Integer id;
     /**
      * 营销机会ID
@@ -28,19 +35,44 @@ public class SalesPlan {
      * 计划执行结果(0.未执行1.执行中2.开发成功3.开发失败 )
      */
     private String status;
+    /**
+     * 联系人
+     */
+    private String contactName;
+    /**
+     * 客户名称
+     */
+    private String customerName;
+    /**
+     * 电话
+     */
+    private String contactTel;
 
     /**
      * toString()方法
      */
-    @Override
-    public String toString() {
-        return "SalesPlan{" +
-                "id=" + id +
-                ", salesChanceId=" + salesChanceId +
-                ", date=" + date +
-                ", planContent='" + planContent + '\'' +
-                ", status='" + status + '\'' +
-                '}';
+    public String getContactName() {
+        return contactName;
+    }
+
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getContactTel() {
+        return contactTel;
+    }
+
+    public void setContactTel(String contactTel) {
+        this.contactTel = contactTel;
     }
 
     /**

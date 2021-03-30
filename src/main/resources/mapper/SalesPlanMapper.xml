@@ -5,9 +5,9 @@
 
 <mapper namespace="cn.doublefloat.crm.project.customer.mapper.SalesPlanMapper">
     <insert id="insertDate">
-        INSERT into sales_plan(sales_chance_id)
-        select id from sales_chance where `status`=1
-                                      and not EXISTS(select sales_chance_id from sales_plan where sales_chance.id=sales_plan.sales_chance_id)
+        INSERT into sales_plan(customer_name,contact_name,contact_tel,sales_chance_id)
+        select contact,customer_name,contact_tel,id from sales_chance where `status`=1
+                                                                        and not EXISTS(select sales_chance_id from sales_plan where sales_chance.id=sales_plan.sales_chance_id)
     </insert>
     <update id="startPlan">
         update sales_plan

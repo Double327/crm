@@ -4,10 +4,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cn.doublefloat.crm.project.system.mapper.UserDetailsMapper">
+    <insert id="addUserLog">
+        insert into user_login_info(username,loginip) values(#{username},#{loginip})
+    </insert>
     <select id="selectUserByName" resultType="cn.doublefloat.crm.project.system.domain.vo.UserDetail">
         select * from user where login_name = #{loginName}
     </select>
     <select id="queryRolesByUid" resultType="cn.doublefloat.crm.project.system.domain.Role">
         select * from role r,user_role ur where r.id = ur.role_id and ur.user_id =#{id}
+    </select>
+    <select id="findAllLogs" resultType="cn.doublefloat.crm.project.system.domain.vo.UserLog">
+        select * from user_login_info
     </select>
 </mapper>

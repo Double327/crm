@@ -4,6 +4,7 @@ import cn.doublefloat.crm.framework.web.controller.BaseController;
 import cn.doublefloat.crm.framework.web.domain.JsonResult;
 import cn.doublefloat.crm.project.customer.domain.SalesPlan;
 import cn.doublefloat.crm.project.customer.service.SalesPlanService;
+ import cn.doublefloat.crm.project.customer.service.impl.SalesPlanImpl;
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.spring.web.json.Json;
@@ -22,7 +23,7 @@ import java.util.List;
 @RequestMapping("/SalesPlan")
 public class SalesPlanController extends BaseController {
     @Resource
-    private SalesPlanService salesPlanService;
+    private SalesPlanImpl salesPlanService;
 
     /**
      * 查询所有营销计划
