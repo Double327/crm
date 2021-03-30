@@ -70,6 +70,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 response.setContentType("application/json;charset=utf-8");
                 PrintWriter out = response.getWriter();
                 UserDetail userDetail = (UserDetail) authentication.getPrincipal();
+                /*
+                * 添加用户日志
+                * */
+                UserLog userLog = new UserLog();
+                String remoteAddr = request.getRemoteAddr();
+                userLog.setLoginip(remoteAddr);
+                userLog.setUsername(userDetail.getUsername());
+                int i = userDetailService.addUserLog(userLog);
+                if(i>0){
+                    System.out.println("添加用户日志成功");
+                }else{
+                    System.out.println("添加用户日志失败");
+                }
                 String jwt = Jwts.builder()
                         .claim("authorities", userDetail)//配置用户角色
                         .setSubject(userDetail.getUsername())
