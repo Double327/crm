@@ -2,7 +2,7 @@
   <div>
     <template>
       <el-main>
-        <el-button  icon="el-icon-delete" type="primary">登录日志管理</el-button>
+        <el-button type="primary">登录日志管理</el-button>
       </el-main>
       <el-table
           ref="singleTable"
@@ -93,7 +93,5 @@ export default {
 
 
 <style scoped>
-.right-search{
-  margin-left: 1360px;
-}
+
 </style>
